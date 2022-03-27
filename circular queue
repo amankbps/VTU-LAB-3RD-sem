@@ -1,0 +1,59 @@
+#include<stdio.h>
+#define MAX 5
+int f=0,r=0;
+int q[MAX];
+int cnt=0;
+
+void push(int x)
+{
+    if(cnt==MAX)
+        printf("\noveflow");
+        else
+        {
+    q[r%MAX]=x;
+    r++;
+    cnt++;}
+}
+int pop()
+{
+    if(cnt==0)
+        {printf("underflow ");
+        return -1;}
+        else{
+    int temp;
+    temp=q[f%MAX];
+    //q[f%MAX]=-1;
+    f++;
+    cnt--;
+    return temp;}
+}
+
+void dis()
+{
+    if(cnt==0)
+    printf("underflow ");
+    for(int i=f;i<r;i++)
+        printf("%d ",q[i%MAX]);
+}
+
+
+int main()
+{
+    int n,data;
+    printf("1.insert\n2.delet\n3.display\n4.exit ");
+    while(1) {
+    scanf("%d",&n);
+    switch(n)
+    {
+        case 1:printf("enter element ");
+                scanf("%d",&data);
+                push(data);
+                break;
+        case 2:printf("%d",pop());
+              break;
+        case 3:dis();
+              break;
+        case 4:return 0;
+    }}
+    return 0;
+}
