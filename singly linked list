@@ -1,0 +1,126 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct student
+{
+    char usn[20],branch[10],name[20];
+    char sem[10],ph[10];
+    struct student*next;
+}student;
+
+student*creat()
+{
+    student n=(student)malloc(sizeof(student));
+    printf("enter name :");
+    scanf("%s",n->name);
+    printf("usn:");
+    scanf("%s",n->usn);
+    printf("branch:");
+    scanf("%s",n->branch);
+    printf("sem ");
+    scanf(" %s",n->sem);
+    printf("ph no :");
+    scanf(" %s",n->ph);
+    n->next=NULL;
+    return n;
+}
+void insertf(student**s)
+{
+    student*n=creat();
+    if(*s==NULL)
+    {
+        *s=n;
+        return;
+    }
+    else
+    {
+        n->next=(*s);
+        *s=n;
+
+    }
+}
+void delf(student**s)
+{
+    student*t;
+    t=*s;
+    if(t==NULL)
+    {
+        printf("nothing is delete");
+        return;
+    }
+    else
+    {
+        (*s)=t->next;
+        free(t);
+    }
+}
+void display(student**s)
+{
+    student*t;
+    t=*s;
+    if(*s==NULL)
+    {
+        printf("no record");
+        return;
+    }
+    while(t)
+    {
+        printf("name:%s\nusn:%s\nbreanh:%s\nph:%s\nsem:%s\n",t->name,t->usn,t->branch,t->ph,t->sem);
+        t=t->next;
+    }
+}
+void delast(student**s)
+{   student*t1,*t2;
+
+    if(*s==NULL)
+    {  printf("empty record ");
+        return;
+    }
+    t1=*s;
+    t2=NULL;
+    while(t1->next)
+    {
+        t2=t1;
+        t1=t1->next;
+    }
+    t2->next=NULL;
+    free(t1);
+}
+void insertl(student**s)
+{
+    student*t,*n;
+    n=creat();
+    t=*s;
+    if(t==NULL)
+        return;
+    while(t->next)
+        t=t->next;
+    t->next=n;
+}
+int main()
+{
+    student*start=NULL;
+    int c,n;
+    printf("0.create\n1.insertfront\n2.deletefront\n3.display\n4.insertlast\n5.delete last\n");
+    while(1)
+    {
+    printf("Enter ur choice:");
+    scanf("%d",&c);
+    switch(c)
+    {   case 0:printf("enter the no of student");
+               scanf("%d",&n);
+               for(int i=0;i<n;i++)
+                insertf(&start);
+                 break;
+        case 1:insertf(&start);
+               break;
+        case 2:delf(&start);
+               break;
+        case 3:display(&start);
+               break;
+         case 4:insertl(&start);
+                break;
+         case 5:delast(&start);
+
+    }}
+    return 0;
+}
