@@ -1,0 +1,55 @@
+#include<stdio.h>
+
+int strl(char s[])
+{
+    int i=0;
+    while(s[i])
+        i++;
+    return i;
+}
+
+int main()
+{   int n,m,k,flag=0,p=0;
+    char s[50],pat[20],rep[50],ans[100];
+    printf("enter the string ");
+    scanf("%[^\n]",s);
+    printf("enter the pattern ");
+    scanf(" %[^\n]",pat);
+    printf("enter the replacement ");
+    scanf(" %[^\n]",rep);
+
+   n=strl(s);
+   m=strl(pat);
+   k=strl(rep);
+
+  for(int i=0;i<n;i++)
+  {    flag=0;
+      for(int j=0;j<m;j++)
+      {
+          if(s[i+j]!=pat[j])
+          {
+              flag=1;
+              break;
+          }
+
+      }
+      if(flag==0)
+      {   i=i+m-1;
+          for(int a=0;a<k;a++)
+          {
+              ans[p]=rep[a];
+              p++;
+          }
+
+      }
+      else
+      {
+          ans[p]=s[i];
+          p++;
+      }
+  }
+
+   printf("%s ",ans);
+   //printf("%d",n);
+   return 0;
+}
