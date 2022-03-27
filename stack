@@ -1,0 +1,80 @@
+#include<stdio.h>
+#define MAX 5
+int top=-1;
+int stack[MAX];
+void push(int data)
+{
+    if(top+1==MAX)
+        printf("overflow");
+    else
+    {
+        stack[++top]=data;
+    }
+}
+int pop()
+{  int temp;
+    if(top==-1)
+        printf("underflow");
+    else
+    {
+      temp=stack[top];
+      top--;
+      return temp;
+    }
+}
+void plaindrome()
+{
+    int a[MAX],n,flag=0,top=-1;
+    printf("enter size");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+        push(a[i]);
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(pop()!=a[i])
+        {
+            flag=1;
+            break;
+        }
+    }
+    if(flag==1)
+        printf("not plaindrome");
+    else
+        printf("plaindrome");
+}
+void display()
+{
+    if(top==-1)
+        printf("underflow");
+     else
+     {
+        for(int i=top;i>=0;i--)
+            printf("%d ",pop());
+     }
+}
+int main()
+{
+    int data,c;
+    printf("1.push\n2.pop\n3.display\n4.plaindrome\n5.exit");
+    while(1) {
+    scanf("%d",&c);
+    switch(c)
+    {
+        case 1:printf("enter data ");
+              scanf("%d",&data);
+              push(data);
+              break;
+        case 2:printf("%d",pop());
+              break;
+        case 3:display();
+              break;
+         case 4:plaindrome();
+                break;
+          case 5:return 0;
+
+    }}
+    return 0;
+}
