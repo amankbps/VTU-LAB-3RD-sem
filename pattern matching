@@ -48,7 +48,7 @@ int main()
           p++;
       }
   }
-
+  ans[p]='\0';
    printf("%s ",ans);
    //printf("%d",n);
    return 0;
