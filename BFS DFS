@@ -1,0 +1,95 @@
+#include<stdio.h>
+#define MAX 20
+
+int adj[MAX][MAX],q[100],f=0,r=-1,n;
+int vis[MAX];
+
+
+void creat()
+{
+    int x;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(i==j)
+                adj[i][j]=0;
+            else
+            {
+                printf(" %d to %d ",i,j);
+                printf("\npress1:connected\npress 0:not connected");
+                scanf("%d",&x);
+                adj[i][j]=x;
+            }
+        }
+    }
+}
+
+void bfs(int v)
+{
+    if(vis[v]==0)
+    {
+        printf("%d ",v);
+        vis[v]=1;
+    }
+    for(int j=0;j<n;j++)
+    {
+        if(adj[v][j]==1 && vis[j]==0)
+            q[++r]=j;
+    }
+     if(f<=r)
+     {
+         vis[f];
+         bfs(q[f++]);
+     }
+}
+void dfs(int v)
+{
+
+   vis[v]=1;
+   printf("%d ",v);
+   for(int i=0;i<n;i++)
+   {
+       if(adj[v][i]==1 && vis[i]==0)
+         dfs(i);
+   }
+}
+int main()
+{
+    int c,cnt=0;
+    printf("enter the number of nodes ");
+    scanf("%d",&n);
+
+    printf("\n1.creat\n2.bfs\n3.dfs\n");
+    while(1) {
+    scanf("%d",&c);
+
+    switch(c)
+    {
+        case 1:creat();break;
+        case 2:for(int i=0;i<n;i++)
+                 vis[i]=0;
+                 printf("\nBFS\n");
+                  bfs(0);
+                  break;
+        case 3:for(int i=0;i<n;i++)
+                 vis[i]=0;
+                 dfs(0);
+                 for(int i=0;i<n;i++)
+                 {
+                     if(vis[i])
+                        cnt++;
+                 }
+                 if(cnt==n)
+                    printf("graph is connected ");
+                 else
+                    printf("graph is not connected ");
+                 break;
+    }
+    }
+    return 0;
+}
+
+
+
+
